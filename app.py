@@ -28,8 +28,7 @@ context = ""
 @app.post('/object_detection') 
 async def transcripe(file: UploadFile): 
     try:
-        flag = False
-        data = ""
+
         # MODEL_NAME = "gpt-3.5-turbo"
         # chromadb.Client()
         print("API HIT ************* Detection")

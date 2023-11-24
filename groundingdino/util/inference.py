@@ -99,6 +99,7 @@ def predict(
 
 def annotate(image_source: np.ndarray, boxes: torch.Tensor, logits: torch.Tensor, phrases: List[str]) -> np.ndarray:
     h, w, _ = image_source.shape
+    print(h,w)
     boxes = boxes * torch.Tensor([w, h, w, h])
     xyxy = box_convert(boxes=boxes, in_fmt="cxcywh", out_fmt="xyxy").numpy()
     detections = sv.Detections(xyxy=xyxy)
@@ -112,7 +113,7 @@ def annotate(image_source: np.ndarray, boxes: torch.Tensor, logits: torch.Tensor
     box_annotator = sv.BoxAnnotator()
     annotated_frame = cv2.cvtColor(image_source, cv2.COLOR_RGB2BGR)
     annotated_frame = box_annotator.annotate(scene=annotated_frame, detections=detections, labels=labels)
-    return annotated_frame
+    return xyxy
 
 
 # ----------------------------------------------------------------------------------------------------------------------
